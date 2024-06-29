@@ -1,0 +1,20 @@
+{
+  "name": "load-balancer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/index"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.10.10",
+    "dotenv": "^16.4.5",
+    "grpc-node-server-reflection": "^1.0.2",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.2"
+  }
+}

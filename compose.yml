@@ -1,0 +1,50 @@
+version: "3.5"
+
+services:
+  api01: &api
+    build: ./server
+    restart: always
+    environment:
+      - SERVER_NUMBER=01
+      - PORT=50050
+      - HASH_DIFFICULTY=00
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "500MB"
+  api02:
+    <<: *api 
+    environment:
+      - SERVER_NUMBER=02
+      - PORT=50051
+      - HASH_DIFFICULTY=0000
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "200MB"
+  api03:
+    <<: *api 
+    environment:
+      - SERVER_NUMBER=03
+      - PORT=50052
+      - HASH_DIFFICULTY=0000
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "200MB"
+  
+  load_balancer:
+    build: ./lb
+    environment:
+      - GRPC_SERVERS=api01:50050;api02:50051;api03:50052
+      - PORT=50010
+      - LB_ALGORITHM_TYPE=PEAK  # LC (LEAST CONNECTION) | RR (ROUND ROBIN) | PEAK (PEAK EWMA)
+    depends_on:
+      - api01
+      - api02
+      - api03
+    ports:
+      - "50010:50010" 

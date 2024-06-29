@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package todo;
+
+message Empty {}
+
+message HealthCheckResponse {
+    message HealthCheck {
+        bool db = 1;
+        bool rabbitMQ = 3;
+        bool paymentGateway = 4;
+        int32 memory = 5;
+        int32 cpu = 6;
+    }
+    HealthCheck live = 1;
+}
+
+message ToDo {
+    string id = 1;
+    string description = 2;
+}
+
+message ListToDoRequest {
+    string id = 1;
+}
+
+message ListToDoResponse {
+   repeated ToDo data = 1;
+}
+
+service ToDoService {
+    rpc ListToDo (ListToDoRequest) returns (ListToDoResponse);
+}
+
+
+service HealthCheckService {
+    rpc HealthCheck (Empty) returns (HealthCheckResponse);
+}
