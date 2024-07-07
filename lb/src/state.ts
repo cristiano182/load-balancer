@@ -86,5 +86,4 @@ static updatePEWMA(address: string, elapsedTime: number) {
   const alpha = 1 - Math.exp(-elapsedTime / delay_time);
   this.latencies[address].ewma = alpha * elapsedTime + (1 - alpha) * server.ewma;
 }
-
 }

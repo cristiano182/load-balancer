@@ -7,12 +7,14 @@ services:
     environment:
       - SERVER_NUMBER=01
       - PORT=50050
-      - HASH_DIFFICULTY=00
+      - HASH_DIFFICULTY=0000
     deploy:
       resources:
         limits:
-          cpus: "1"
-          memory: "500MB"
+          cpus: "0.3"
+          memory: "150MB"
+    ports:
+      - "50050:50050" 
   api02:
     <<: *api 
     environment:
@@ -23,7 +25,9 @@ services:
       resources:
         limits:
           cpus: "0.3"
-          memory: "200MB"
+          memory: "150MB"
+    ports:
+      - "50051:50051" 
   api03:
     <<: *api 
     environment:
@@ -33,15 +37,17 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
-          memory: "200MB"
+          cpus: "1"
+          memory: "500MB"
+    ports:
+      - "50052:50052" 
   
   load_balancer:
     build: ./lb
     environment:
       - GRPC_SERVERS=api01:50050;api02:50051;api03:50052
       - PORT=50010
-      - LB_ALGORITHM_TYPE=PEAK  # LC (LEAST CONNECTION) | RR (ROUND ROBIN) | PEAK (PEAK EWMA)
+      - LB_ALGORITHM_TYPE=PEAK # LC (LEAST CONNECTION) | RR (ROUND ROBIN) | PEAK (PEAK EWMA)
     depends_on:
       - api01
       - api02
