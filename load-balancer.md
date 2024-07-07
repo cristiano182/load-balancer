@@ -4,6 +4,7 @@
 ## Funções Principais do Load Balancer:
 
 
+
 ### Distribuição de Carga:
     O principal objetivo de um load balancer é distribuir o tráfego de entrada de maneira uniforme e eficiente entre vários servidores backend. Isso evita a sobrecarga de qualquer servidor individual, garantindo que todos os servidores estejam sendo utilizados de maneira eficaz.
 
@@ -20,16 +21,8 @@
     Alguns load balancers podem lidar com a criptografia SSL/TLS, aliviando essa carga dos servidores backend. Isso é chamado de SSL termination. Além disso, eles podem realizar a compressão de dados (por exemplo receber com protocolo http e repassar com o protocolo http/2 proto-buffer grpc ) e outras tarefas de otimização para melhorar o desempenho geral do sistema.
 
 
-## Diferenca entre Load Balancers e Proxy Reverso:
-    Um proxy reverso é um tipo específico de servidor proxy que atua como intermediário entre os clientes externos e os servidores internos. Enquanto um proxy convencional encaminha as requisições dos clientes para os servidores externos, um proxy reverso faz o contrário: recebe requisições dos clientes e as encaminha para os servidores internos.
-
-    Embora não seja tradicionalmente chamado de load balancer, um proxy reverso pode atuar como um, direcionando o tráfego para diferentes servidores com base em regras predefinidas.
-    Em resumo, um load balancer desempenha um papel fundamental na construção de sistemas altamente disponíveis, escaláveis e eficientes, garantindo que os recursos de computação sejam utilizados de forma ótima e que os usuários finais recebam uma experiência de serviço consistente e confiável.
-
-
 ### Implemetando um Load Balancer
     Um Load Balancer pode usar vários algoritmos para distribuir o tráfego entre os servidores backend. Cada algoritmo tem suas próprias características e é adequado para diferentes cenários de uso. Aqui estão alguns dos algoritmos mais comuns:
-
 
 #### Round Robin
     Round Robin é um dos algoritmos de balanceamento de carga mais simples e comuns. Ele distribui as requisições sequencialmente entre os servidores backend.
